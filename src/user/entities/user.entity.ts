@@ -1,7 +1,26 @@
-import { BaseEntity, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class User extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
+
+  @Column({
+    length: 255,
+  })
+  email: string;
+
+  @Column()
+  pwdHash: string;
+
+  @Column({
+    default: 'user',
+  })
+  role: 'user' | 'admin';
+
+  @Column({
+    nullable: true,
+    default: null,
+  })
+  currentTokenId: string | null;
 }
